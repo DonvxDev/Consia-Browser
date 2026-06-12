@@ -10,6 +10,9 @@ on:
         required: false
         default: 'v0.0.0.1-KDICLM'
 
+permissions:
+  contents: write
+
 jobs:
   build-windows:
     runs-on: windows-latest
