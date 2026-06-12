@@ -35,16 +35,31 @@ jobs:
       - name: Build renderer + Electron main
         run: pnpm run build
 
+      - name: List build outputs
+        run: |
+          echo "=== dist/ ==="
+          dir dist /s /b 2>nul || echo "(empty)"
+          echo "=== dist-electron/ ==="
+          dir dist-electron /s /b 2>nul || echo "(empty)"
+        shell: cmd
+
       - name: Package Windows installer
-        run: pnpm exec electron-builder --win --x64
+        run: npx electron-builder --win --x64 --publish never
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: electron-builder
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      - name: List release output
+        if: always()
+        run: dir release /s /b 2>nul || echo "(no release folder)"
+        shell: cmd
 
       - name: Upload Consia_Pcsetup.exe to release
+        if: success()
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name || inputs.tag }}
-          files: release/Consia_Pcsetup.exe
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          files: release/**/*.exe
           fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
