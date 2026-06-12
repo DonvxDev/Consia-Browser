@@ -32,14 +32,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Fix package name for electron-builder
+      - name: Fix package name and version for electron-builder
         run: |
           node -e "
             const fs = require('fs');
             const p = JSON.parse(fs.readFileSync('package.json', 'utf8'));
             p.name = 'consia-browser';
+            p.version = '0.0.1';
             fs.writeFileSync('package.json', JSON.stringify(p, null, 2));
-            console.log('Fixed name to:', p.name);
+            console.log('Fixed name:', p.name, '| version:', p.version);
           "
 
       - name: Build renderer + Electron main
