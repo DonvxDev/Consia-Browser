@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brave-style dark palette */
+  --color-brave-bg: #1b1b1f;
+  --color-brave-toolbar: #26262b;
+  --color-brave-sidebar: #26262b;
+  --color-brave-input: #1b1b1f;
+  --color-brave-border: #3a3a42;
+  --color-brave-border-hover: #55555f;
+  --color-brave-text: #e8e8ed;
+  --color-brave-muted: #8e8e9a;
+  --color-brave-hover: #32323a;
+  --color-brave-active: #3a3a48;
+  --color-brave-accent: #fb6f4a;
+  --color-brave-accent-hover: #f05a35;
+  --color-brave-safe: #5fa17a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #1b1b1f;
+  color: #e8e8ed;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  font-size: 13px;
+}
+
+.tabs-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.tabs-scroll::-webkit-scrollbar { display: none; }
+
+textarea, input {
+  user-select: text;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #3a3a42; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #55555f; }
+
+.tab-bar {
+  -webkit-app-region: drag;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 0.7s linear infinite;
+}
